@@ -14,7 +14,7 @@ end
 #Aanmaken van de load balancer
 config.vm.define "load_balancer" do |lb_config|
 	lb_config.vm.box = "ubuntu/trusty64"
-	lb_config.vm.hostname = "load_balancer"
+	lb_config.vm.hostname = "loadbalancer"
 	lb_config.vm.network :private_network, ip: "10.0.15.21"
 	lb_config.vm.network "forwarded_port", guest: 80, host: 1230
 	lb_config.vm.provider "virtualbox" do |vb|
@@ -25,7 +25,7 @@ end
 #Aanmaken van enkele webservers
 config.vm.define "web_1" do |websrvr|
 	websrvr.vm.box = "ubuntu/trusty64"
-	websrvr.vm.hostname = "web_1"
+	websrvr.vm.hostname = "web1"
 	websrvr.vm.network :private_network, ip: "10.0.15.31"
 	websrvr.vm.network "forwarded_port", guest: 80, host: "8081"
 	websrvr.vm.provider "virtualbox" do |vb|
@@ -35,7 +35,7 @@ end
 
 config.vm.define "web_2" do |websrvr|
 	websrvr.vm.box = "ubuntu/trusty64"
-	websrvr.vm.hostname = "web_2"
+	websrvr.vm.hostname = "web2"
 	websrvr.vm.network :private_network, ip: "10.0.15.3"
 	websrvr.vm.network "forwarded_port", guest: 80, host: "8082"
 	websrvr.vm.provider "virtualbox" do |vb|

@@ -19,9 +19,9 @@ ssh-keygen -t rsa -b 2048 -N "" -f /home/vagrant/.ssh/id_rsa
 #Playbook lijst
 ansible-playbook /vagrant/Ansible/ssh-addkeys.yml 
 
-ansible-playbook /vagrant/Ansible/site.yml 
+ansible-playbook /vagrant/Ansible/playbook.yml 
 
-#ansible-playbook /vagrant/Ansible/rolling.yml 
+ansible-playbook /vagrant/Ansible/playbookZeroDowntime.yml 
 
 # copy examples into /home/vagrant (from inside the mgmt node)
 #cp -a /vagrant/examples/* /home/vagrant
