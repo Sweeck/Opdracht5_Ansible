@@ -1,10 +1,10 @@
 Vagrant.configure("2") do |config|
 
 #Aanmaken van de management node
-config.vm.define :management do |management_config|
+config.vm.define "management" do |management_config|
 	management_config.vm.box = "ubuntu/trusty64"
 	management_config.vm.hostname = "management"
-	management_config.vm.network :privte_network, ip: "10.0.15.20"
+	management_config.vm.network :private_network, ip: "10.0.15.20"
 	management_config.vm.provider  "virtualbox" do |vb|
 		vb.memory = "256"
 		end
@@ -12,9 +12,9 @@ config.vm.define :management do |management_config|
 end
 
 #Aanmaken van de load balancer
-config.vm.define :lb do |lb_config|
+config.vm.define "load_balancer" do |lb_config|
 	lb_config.vm.box = "ubuntu/trusty64"
-	lb_config.vm.hostname = "load balancer"
+	lb_config.vm.hostname = "load_balancer"
 	lb_config.vm.network :private_network, ip: "10.0.15.21"
 	lb_config.vm.network "forwarded_port", guest: 80, host: 1230
 	lb_config.vm.provider "virtualbox" do |vb|
@@ -41,4 +41,5 @@ config.vm.define "web_2" do |websrvr|
 	websrvr.vm.provider "virtualbox" do |vb|
 		vb.memory = "256"
 		end
+	end
 end

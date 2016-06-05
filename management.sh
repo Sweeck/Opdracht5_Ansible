@@ -7,21 +7,21 @@ apt-get update
 apt-get -y install ansible
 
 
-rm /etc/ansible/ansible.cfg
-ln -s /vagrant/ansible/ansible.cfg /etc/ansible/ansible.cfg
+rm /etc/Ansible/ansible.cfg
+ln -s /vagrant/Ansible/ansible.cfg /etc/Ansible/ansible.cfg
 
 
 #SSH keys
-ssh-keyscan bl www1 www2 >> .ssh/known_hosts
+ssh-keyscan lb web_1 web_2 >> .ssh/known_hosts
 
 ssh-keygen -t rsa -b 2048 -N "" -f /home/vagrant/.ssh/id_rsa
 
 #Playbook lijst
-ansible-playbook /vagrant/ansible/ssh-addkey.yml 
+ansible-playbook /vagrant/Ansible/ssh-addkeys.yml 
 
-ansible-playbook /vagrant/ansible/site.yml 
+ansible-playbook /vagrant/Ansible/site.yml 
 
-ansible-playbook /vagrant/ansible/rolling.yml 
+#ansible-playbook /vagrant/Ansible/rolling.yml 
 
 # copy examples into /home/vagrant (from inside the mgmt node)
 #cp -a /vagrant/examples/* /home/vagrant
