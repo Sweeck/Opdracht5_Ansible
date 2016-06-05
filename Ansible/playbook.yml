@@ -46,7 +46,7 @@
     - socat
 
   - name: enable haproxy
-    lineinfile: dest=/etc/default/haproxy regexp="ENABLED" line="ENABLED=1"
+    lineinfile: dest=/etc/default/haproxy regexp="^ENABLED" line="ENABLED=1"
     notify: restart haproxy 
 
   - name: deploy haproxy config

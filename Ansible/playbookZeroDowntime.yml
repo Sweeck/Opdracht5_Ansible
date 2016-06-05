@@ -1,6 +1,4 @@
----
-
-# common
+# op alle servers toepassen
 - hosts: all
   sudo: yes
   gather_facts: no
@@ -10,12 +8,9 @@
   - name: install git
     action: apt name=git state=installed update_cache=yes
 
-# web
-- hosts: web
+# webservers
+- hosts: webservers
   sudo: yes
-  vars:
-    # https://github.com/OurDarkLord/site-example-ansible
-    app_version: release-0.01
   serial: 1
 
   pre_tasks:
@@ -23,7 +18,7 @@
   - name: disable server in haproxy
     shell: echo "disable server Opdracht2/{{ inventory_hostname }}" | socat stdio /var/lib/haproxy/stats
     delegate_to: "{{ item }}"
-    with_items: groups.bl
+    with_items: groups.load_balancer
 
   tasks:
 
@@ -39,13 +34,9 @@
     notify: restart nginx
 
   - name: clean existing website content
-    #shell: rm -f /usr/share/nginx/html/*
     file: path=/usr/share/nginx/html/ state=absent
 
   - name: deploy website content
-    git: repo=https://github.com/OurDarkLord/site-example-ansible
-         dest=/usr/share/nginx/html/
-         version={{ app_version }}
 
   handlers:
 
@@ -59,8 +50,8 @@
     delegate_to: "{{ item }}"
     with_items: groups.bl
 
-# lb
-- hosts: lb
+# load balancer
+- hosts: load_balancer
   sudo: yes  
 
   tasks:
